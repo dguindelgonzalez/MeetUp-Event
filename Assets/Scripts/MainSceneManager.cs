@@ -26,7 +26,8 @@ public class MainSceneManager : MonoBehaviour {
     public enum ApplicationStateType
     {
         IdleState = 0,
-        BotState = 1,
+        SpeakState = 1,
+        BotState = 2,
         CustomVisionState = 2,
     }
 
@@ -36,8 +37,10 @@ public class MainSceneManager : MonoBehaviour {
         set
         {
             applicationState = value;
+            ChangeView(value);
         }
     }
+    public Animator SceneAnimatorController;
     #endregion
 
     #region Unity Defaults Methods
@@ -123,6 +126,20 @@ public class MainSceneManager : MonoBehaviour {
         FileStream fileStream = new FileStream(imageFilePath, FileMode.Open, FileAccess.Read);
         BinaryReader binaryReader = new BinaryReader(fileStream);
         return binaryReader.ReadBytes((int)fileStream.Length);
+    }
+
+    private static void ChangeView(ApplicationStateType value)
+    {
+
+        switch(value)
+        {
+            case ApplicationStateType.IdleState:
+                break;
+            case ApplicationStateType.BotState:
+                break;
+            case ApplicationStateType.CustomVisionState:
+                break;
+        }
     }
     #endregion
 }
