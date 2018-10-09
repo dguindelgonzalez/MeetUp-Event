@@ -1,7 +1,4 @@
-﻿using HoloToolkit.Unity.InputModule;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.XR.WSA.Input;
@@ -46,10 +43,10 @@ public class ImageCapture : MonoBehaviour
     /// </summary>
     private void TapHandler(TappedEventArgs obj)
     {
-        if (VisionManager.ApplicationState == VisionManager.ApplicationStateType.ComputerVisionMode)
-        {
-            audioClickButton.Play();
+        audioClickButton.Play();
 
+        if (MainSceneManager.ApplicationState == MainSceneManager.ApplicationStateType.CustomVisionState)
+        {
             if (flagFirstTap)
             {
                 flagFirstTap = false;
@@ -90,7 +87,7 @@ public class ImageCapture : MonoBehaviour
         // to the VisionManager class
         photoCaptureObject.Dispose();
         photoCaptureObject = null;
-        StartCoroutine(VisionManager.instance.AnalyseLastImageCaptured());
+        StartCoroutine(MainSceneManager.instance.AnalyseLastImageCaptured());
     }
 
     /// <summary>    
@@ -121,7 +118,7 @@ public class ImageCapture : MonoBehaviour
 
                 string filePath = Path.Combine(Application.persistentDataPath, filename);
 
-                VisionManager.instance.imagePath = filePath;
+                MainSceneManager.instance.imagePath = filePath;
 
                 photoCaptureObject.TakePhotoAsync(filePath, PhotoCaptureFileOutputFormat.JPG, OnCapturedPhotoToDisk);
 
