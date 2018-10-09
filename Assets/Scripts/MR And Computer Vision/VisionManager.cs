@@ -1,55 +1,52 @@
-﻿using Assets.Scripts;
-using Assets.Scripts.MR_And_Computer_Vision;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class MainSceneManager : MonoBehaviour {
+public class VisionManager : MonoBehaviour {
+
+    #region Public Properties
+    public enum ApplicationStateType
+    {
+        TipPanelState = 1,
+        ComputerVisionMode = 2,
+    }
+
+    public static ApplicationStateType ApplicationState
+    {
+        get { return _applicationState; }
+        set
+        {
+            _applicationState = value;
+        }
+    }
+
+    public static VisionManager instance;
+    public Transform TipsPanel;
+    #endregion
 
     #region Private Fields
-    private static ApplicationStateType applicationState;
 
     // you must insert your service key here!    
     private string authorizationKey = "0282728a679949fcac91cc8c066f462f";
     private const string ocpApimSubscriptionKeyHeader = "Ocp-Apim-Subscription-Key";
     private string visionAnalysisEndpoint = "https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/analyze?visualFeatures=Tags";   // This is where you need to update your endpoint, if you set your location to something other than west-us.
+
     internal byte[] imageBytes;
+
     internal string imagePath;
     private static ApplicationStateType _applicationState;
     #endregion
 
-    #region Public Properties
-    public static MainSceneManager instance;
-    public enum ApplicationStateType
+    #region Unity Default Mehtods
+    private void Awake()
     {
-        IdleState = 0,
-        BotState = 1,
-        CustomVisionState = 2,
-    }
-
-    public static ApplicationStateType ApplicationState
-    {
-        get { return applicationState; }
-        set
-        {
-            applicationState = value;
-        }
-    }
-    #endregion
-
-    #region Unity Defaults Methods
-    void Awake () {
         // allows this instance to behave like a singleton
         instance = this;
-        ApplicationState = ApplicationStateType.IdleState;
+        Instantiate(TipsPanel, new Vector3(0,0,0),new Quaternion(0,0,1.6f,0));
     }
-	
-	void Update () {
-		
-	}
     #endregion
 
     #region Public Methods
@@ -125,4 +122,19 @@ public class MainSceneManager : MonoBehaviour {
         return binaryReader.ReadBytes((int)fileStream.Length);
     }
     #endregion
+
+    [System.Serializable]
+    public class TagData
+    {
+        public string name;
+        public float confidence;
+    }
+
+    [System.Serializable]
+    public class AnalysedObject
+    {
+        public TagData[] tags;
+        public string requestId;
+        public object metadata;
+    }
 }
