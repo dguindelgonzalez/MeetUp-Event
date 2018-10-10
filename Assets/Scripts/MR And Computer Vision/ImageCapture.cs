@@ -87,7 +87,7 @@ public class ImageCapture : MonoBehaviour
         // to the VisionManager class
         photoCaptureObject.Dispose();
         photoCaptureObject = null;
-        StartCoroutine(MainSceneManager.instance.AnalyseLastImageCaptured());
+        StartCoroutine(VisionManager.instance.AnalyseLastImageCaptured());
     }
 
     /// <summary>    
@@ -118,7 +118,7 @@ public class ImageCapture : MonoBehaviour
 
                 string filePath = Path.Combine(Application.persistentDataPath, filename);
 
-                MainSceneManager.instance.imagePath = filePath;
+                VisionManager.instance.imagePath = filePath;
 
                 photoCaptureObject.TakePhotoAsync(filePath, PhotoCaptureFileOutputFormat.JPG, OnCapturedPhotoToDisk);
 
