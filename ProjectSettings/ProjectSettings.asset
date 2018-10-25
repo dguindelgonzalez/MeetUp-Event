@@ -596,11 +596,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: Template3D
   metroPackageVersion: 1.0.0.0
-  metroCertificatePath: 
+  metroCertificatePath: Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: Avanade
+  metroCertificateIssuer: Avanade
+  metroCertificateNotAfter: 00af05143080d501
   metroApplicationDescription: Template_3D
   wsaImages: {}
   metroTileShortName: 
@@ -708,7 +708,7 @@ PlayerSettings:
   cloudServicesEnabled:
     UNet: 1
   facebookSdkVersion: 7.9.4
-  apiCompatibilityLevel: 2
+  apiCompatibilityLevel: 3
   cloudProjectId: 2433340a-1faf-46a9-ae80-e3fa368033f2
   projectName: Cain
   organizationId: xamarindev

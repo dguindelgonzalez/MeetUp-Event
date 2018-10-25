@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResultsLabel : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class ResultsLabel : MonoBehaviour
     public Transform lastLabelPlaced;
     [HideInInspector]
     public TextMesh lastLabelPlacedText;
+    public Text ComputerText;
     #endregion
 
     #region Unity Default Methods
@@ -27,13 +29,7 @@ public class ResultsLabel : MonoBehaviour
     /// </summary>
     public void CreateLabel()
     {
-        lastLabelPlaced = Instantiate(labelPrefab, cursor.transform.position, new Quaternion(0,transform.rotation.y, transform.rotation.z, transform.rotation.w));
-
-        lastLabelPlacedText = lastLabelPlaced.GetComponent<TextMesh>();
-
-        // Change the text of the label to show that has been placed
-        // The final text will be set at a later stage
-        lastLabelPlacedText.text = "Analysing...";
+        ComputerText.text = "Analysing...";
     }
 
     /// <summary>
@@ -41,14 +37,11 @@ public class ResultsLabel : MonoBehaviour
     /// </summary>
     public void SetTagsToLastLabel(Dictionary<string, float> tagsDictionary)
     {
-        lastLabelPlacedText = lastLabelPlaced.GetComponent<TextMesh>();
-
-        // At this point we go through all the tags received and set them as text of the label
-        lastLabelPlacedText.text = "I see: \n";
+        ComputerText.text = "I see: \n";
 
         foreach (KeyValuePair<string, float> tag in tagsDictionary)
         {
-            lastLabelPlacedText.text += tag.Key + ", Confidence: " + tag.Value.ToString("0.00 \n");
+            ComputerText.text += tag.Key + ", Confidence: " + tag.Value.ToString("0.00 \n");
         }
     }
     #endregion

@@ -47,27 +47,20 @@ public class ImageCapture : MonoBehaviour
 
         if (MainSceneManager.ApplicationState == MainSceneManager.ApplicationStateType.CustomVisionState)
         {
-            if (flagFirstTap)
-            {
-                flagFirstTap = false;
-            }
-            else
-            {
-                // Only allow capturing, if not currently processing a request.
-                if (currentlyCapturing == false)
-                {
-                    currentlyCapturing = true;
+            // Only allow capturing, if not currently processing a request.
+            //if (currentlyCapturing == false)
+            //{
+            //    currentlyCapturing = true;
 
-                    // increment taps count, used to name images when saving
-                    tapsCount++;
+                // increment taps count, used to name images when saving
+                tapsCount++;
 
-                    // Create a label in world space using the ResultsLabel class
-                    ResultsLabel.instance.CreateLabel();
+                // Create a label in world space using the ResultsLabel class
+                ResultsLabel.instance.CreateLabel();
 
-                    // Begins the image capture and analysis procedure
-                    ExecuteImageCaptureAndAnalysis();
-                }
-            }
+                // Begins the image capture and analysis procedure
+                ExecuteImageCaptureAndAnalysis();
+            ////}
         }
     }
 
