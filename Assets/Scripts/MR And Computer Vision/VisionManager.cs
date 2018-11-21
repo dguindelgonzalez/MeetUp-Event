@@ -11,13 +11,12 @@ public class VisionManager : MonoBehaviour {
 
     #region Private Fields
     // you must insert your service key here!    
-    private string authorizationKey = "0282728a679949fcac91cc8c066f462f";
+    private string computerVisionAuthorizationKey = Keys.ComputerVisionAuthoritationKey;
     private const string ocpApimSubscriptionKeyHeader = "Ocp-Apim-Subscription-Key";
-    private string visionAnalysisEndpoint = "https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/analyze?visualFeatures=Tags";   // This is where you need to update your endpoint, if you set your location to something other than west-us.
+    private string computerVisionAnalysisEndpoint = Keys.ComputerVisionEndpoint;
     internal byte[] imageBytes;
     internal string imagePath;
     #endregion
-
 
     #region Public Properties
     public static VisionManager instance;
@@ -38,12 +37,12 @@ public class VisionManager : MonoBehaviour {
     public IEnumerator AnalyseLastImageCaptured()
     {
         WWWForm webForm = new WWWForm();
-        using (UnityWebRequest unityWebRequest = UnityWebRequest.Post(visionAnalysisEndpoint, webForm))
+        using (UnityWebRequest unityWebRequest = UnityWebRequest.Post(computerVisionAnalysisEndpoint, webForm))
         {
             // gets a byte array out of the saved image
             imageBytes = GetImageAsByteArray(imagePath);
             unityWebRequest.SetRequestHeader("Content-Type", "application/octet-stream");
-            unityWebRequest.SetRequestHeader(ocpApimSubscriptionKeyHeader, authorizationKey);
+            unityWebRequest.SetRequestHeader(ocpApimSubscriptionKeyHeader, computerVisionAuthorizationKey);
 
             // the download handler will help receiving the analysis from Azure
             unityWebRequest.downloadHandler = new DownloadHandlerBuffer();
