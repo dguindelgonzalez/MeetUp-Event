@@ -13,6 +13,7 @@ public class ResultsLabel : MonoBehaviour
     [HideInInspector]
     public TextMesh lastLabelPlacedText;
     public Text ComputerText;
+    public Text CustomText;
     #endregion
 
     #region Unity Default Methods
@@ -29,19 +30,37 @@ public class ResultsLabel : MonoBehaviour
     /// </summary>
     public void CreateLabel()
     {
-        ComputerText.text = "Analysing...";
+        ComputerText.text = "Contacting Cumputer Vision";
+        CustomText.text = "Contacting Custom Vision";
     }
 
     /// <summary>
     /// Set the Tags as Text of the last Label created. 
     /// </summary>
-    public void SetTagsToLastLabel(Dictionary<string, float> tagsDictionary)
+    public void SetTagsToComputertLabel(Dictionary<string, float> tagsDictionary)
     {
-        ComputerText.text = "I see: \n";
+        ComputerText.text = "Computer vision: \n";
 
         foreach (KeyValuePair<string, float> tag in tagsDictionary)
         {
-            ComputerText.text += tag.Key + ", Confidence: " + tag.Value.ToString("0.00 \n");
+            ComputerText.text += $"{tag.Key} Confidence: {tag.Value.ToString("0.00 \n")}";
+        }
+    }
+
+    public void SetTagsToCustomLabel(Dictionary<string, double> tagsDictionary)
+    {
+        if (tagsDictionary != null)
+        {
+            CustomText.text = "Custom Vision: \n";
+
+            foreach (KeyValuePair<string, double> tag in tagsDictionary)
+            {
+                CustomText.text += $"{tag.Key} Accuracy: { tag.Value.ToString("0.00 \n")}";
+            }
+        }
+        else
+        {
+            CustomText.text = "Not objects recognized";
         }
     }
     #endregion

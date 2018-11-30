@@ -24,7 +24,7 @@ public class TipsPanelHandler : MonoBehaviour,IFocusable, IInputClickHandler
 
     public void OnInputClicked(InputClickedEventData eventData)
     {
-        MainSceneManager.ApplicationState = MainSceneManager.ApplicationStateType.CustomVisionState;
+        MainSceneManager.ApplicationState = MainSceneManager.ApplicationStateType.VisionState;
 
         Destroy(TipPanel);
     }

@@ -99,7 +99,6 @@ public class BotDirectLineManager
         }
     }
 
-    #endregion
 
     /// <summary>
     /// Sends the given message to the given conversation.
@@ -159,6 +158,7 @@ public class BotDirectLineManager
             Debug.Log("Bot Direct Line manager is not initialized");
         }
     }
+    #endregion
 
     #region Private Methods
 

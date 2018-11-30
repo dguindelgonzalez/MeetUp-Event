@@ -45,7 +45,7 @@ public class ImageCapture : MonoBehaviour
     {
         audioClickButton.Play();
 
-        if (MainSceneManager.ApplicationState == MainSceneManager.ApplicationStateType.CustomVisionState)
+        if (MainSceneManager.ApplicationState == MainSceneManager.ApplicationStateType.VisionState)
         {
             // Only allow capturing, if not currently processing a request.
             //if (currentlyCapturing == false)
@@ -80,7 +80,8 @@ public class ImageCapture : MonoBehaviour
         // to the VisionManager class
         photoCaptureObject.Dispose();
         photoCaptureObject = null;
-        StartCoroutine(VisionManager.instance.AnalyseLastImageCaptured());
+        StartCoroutine(VisionManager.instance.AnalyseComputerImageCaptured());
+        StartCoroutine(VisionManager.instance.AnalyseCustomtImageCaptured());
     }
 
     /// <summary>    
