@@ -26,6 +26,7 @@ public class MainSceneManager : MonoBehaviour
     public Material Traza02Mat;
     public GameObject Cube;
     public Animator SceneAnimatorController;
+    public GameObject Microphone;
 
     public enum ApplicationStateType
     {
@@ -62,11 +63,11 @@ public class MainSceneManager : MonoBehaviour
     {
         if (textToSpeech.IsSpeaking())
         {
-            SceneAnimatorController.SetInteger("ChangeStateAnimation", 1);
+            SceneAnimatorController.SetInteger("SpeakState", 2);
         }
         else
         {
-            SceneAnimatorController.SetInteger("ChangeStateAnimation", 0);
+            SceneAnimatorController.SetInteger("SpeakState", 0);
         }
     }
 
@@ -191,6 +192,7 @@ public class MainSceneManager : MonoBehaviour
                     //} while (dictationRecognizer.Status != SpeechSystemStatus.Stopped);
 
                     PhraseRecognitionSystem.Restart();
+
                 }
                 break;
             case EventTypes.Error:
